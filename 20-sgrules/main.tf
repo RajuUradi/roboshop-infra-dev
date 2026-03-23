@@ -21,8 +21,8 @@ resource "aws_security_group_rule" "bastion_internet"{
 
 resource "aws_security_group_rule" "mongodb_bastion" {
     type="ingress"
-    from_port= 27017
-    to_port=27017
+    from_port= 22
+    to_port=22
     protocol  = "tcp"
     source_security_group_id=data.aws_ssm_parameter.bastion_sg_id.value
     security_group_id=data.aws_ssm_parameter.mongodb_sg_id.value
@@ -55,8 +55,8 @@ resource "aws_security_group_rule" "mongodb_user"{
 
 resource "aws_security_group_rule" "redis_bastion" {
     type = "ingress"
-    from_port=6379
-    to_port=6379
+    from_port=22
+    to_port=22
     protocol = "tcp"
     source_security_group_id=data.aws_ssm_parameter.bastion_sg_id.value
     security_group_id=data.aws_ssm_parameter.redis_sg_id.value
@@ -88,8 +88,8 @@ resource "aws_security_group_rule" "redis_cart" {
 
 resource "aws_security_group_rule" "mysql_bastion" {
     type="ingress"
-    from_port=3306
-    to_port=3306
+    from_port=22
+    to_port=22
     protocol = "tcp"
     source_security_group_id=data.aws_ssm_parameter.bastion_sg_id.value
     security_group_id = data.aws_ssm_parameter.mysql_sg_id.value
@@ -112,8 +112,8 @@ resource "aws_security_group_rule" "mysql_shipping"{
 
 resource "aws_security_group_rule" "rabbitmq_bastion" {
     type="ingress"
-    from_port=5672
-    to_port=5672
+    from_port=22
+    to_port=22
     protocol = "tcp"
     source_security_group_id=data.aws_ssm_parameter.bastion_sg_id.value
     security_group_id = data.aws_ssm_parameter.rabbitmq_sg_id.value
