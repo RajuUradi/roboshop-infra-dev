@@ -30,6 +30,6 @@ data "aws_ssm_parameter" "rabbitmq_sg_id"{
    name="/${var.project}/${var.environment}/rabbitmq/sg_id"
 }
 
-data "aws_ssm_parameter" "mysql"{
+data "aws_ssm_parameter" "mysql_sg_id"{
     name="/${var.project}/${var.environment}/mysql/sg_id"
 }
