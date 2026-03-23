@@ -87,14 +87,14 @@ resource "terraform_data" "rabbitmq"{
   }
 
   provisioner "file"{
-    source="bastion.sh"
-    destination="/tmp/bastion.sh"
+    source="bootstrap.sh"
+    destination="/tmp/bootstrap.sh"
   }
 
   provisioner "remote-exec"{
     inline=[
-      "chmod +x /tmp/bastion.sh",
-      "sudo sh /tmp/bastion.sh rabbitmq ${var.environment}"
+      "chmod +x /tmp/bootstrap.sh",
+      "sudo sh /tmp/bootstrap.sh rabbitmq ${var.environment}"
     ]
   }
 }
