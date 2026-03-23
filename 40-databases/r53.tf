@@ -16,7 +16,7 @@ resource "aws_route53_record" "redis" {
   allow_overwrite = true
 }
 
-resource "aws_route53_records" "rabbitmq"{
+resource "aws_route53_record" "rabbitmq"{
   zone_id=var.zone_id
   name="rabbitmq-${var.environment}.${var.dns_name}"
   type="A"

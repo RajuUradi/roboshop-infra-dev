@@ -35,7 +35,7 @@ resource "terraform_data" "mongodb" {
 #redis
 resource "aws_instance" "redis" {
   ami=data.aws_ami.roboshop.id
-  instance_type=t3.micro
+  instance_type="t3.micro"
   subnet_id=local.database_subnet_id
   vpc_security_group_ids=[local.redis_sg_id]
   tags=merge(local.common_tags ,{Name="${var.project}-${var.environment}-redis"})
@@ -73,17 +73,17 @@ resource "aws_instance" "rabbitmq"{
   subnet_id=local.database_subnet_id
   vpc_security_group_ids=[local.rabbitmq_sg_id]
 
-  tags=merge(common_tags,{Name="${var.project}-${var.environment}-rabbitmq"})
+  tags=merge(local.common_tags,{Name="${var.project}-${var.environment}-rabbitmq"})
 }
 
 resource "terraform_data" "rabbitmq"{
-  triggers_replace=aws_instance.rabbitmq.sg_id
+  triggers_replace = aws_instance.rabbitmq
 
   connection{
     type="ssh"
     user="ec2-user"
     password="DevOps321"
-    host=aws_instance.raabitmq.private_ip
+    host= aws_instance.rabbitmq.private_ip
   }
 
   provisioner "file"{
@@ -107,7 +107,7 @@ resource "aws_instance" "mysql" {
   subnet_id=local.database_subnet_id
   vpc_security_group_ids=[local.mysql_sg_id]
    iam_instance_profile = aws_iam_instance_profile.mysql.name
-  tags=merge(common_tags,{Name="${var.project}-${var.environment}-mysql"})
+  tags=merge(local.common_tags,{Name="${var.project}-${var.environment}-mysql"})
 }
 
 resource "terraform_data" "mysql"{
