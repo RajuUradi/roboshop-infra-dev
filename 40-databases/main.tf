@@ -53,7 +53,7 @@ resource "terraform_data" "redis"{
     }
 
     provisioner "file" {
-        source="bootsrap.sh"
+        source="bootstrap.sh"
         destination = "/tmp/bootstrap.sh"
     }
 
