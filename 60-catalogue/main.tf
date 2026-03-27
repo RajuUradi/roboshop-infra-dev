@@ -136,7 +136,7 @@ resource "aws_autoscaling_group" "calalogue" {
       min_healthy_percentage = 50
     }
     
-    triggers = ["launch_template"]
+  #  triggers = ["launch_template"] 
   }
     # tags will be applied to instances created by ASG & ASG itself
   dynamic "tag" { 
