@@ -144,8 +144,8 @@ resource "aws_autoscaling_group" "calalogue" {
     for_each = merge({Name="${var.project}-${var.environment}-catalogue"},local.common_tags) 
 
     content {
-      key=tag.each.key
-      value=tag.each.value
+      key=tag.key
+      value=tag.value
       propagate_at_launch = true
     }
   }
