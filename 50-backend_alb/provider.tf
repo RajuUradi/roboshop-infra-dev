@@ -8,7 +8,7 @@ terraform {
 
   backend "s3" {
     bucket  = "remote-state-devops-practice" # Replace with your unique bucket name
-    key     = "remotestate-catalogue.tfstate"
+    key     = "remotestate-backendalb.tfstate"
     region  = "us-east-1"
     encrypt = true
     use_lockfile   = true
