@@ -52,9 +52,9 @@ resource "aws_ami_from_instance" "catalogue" {
 
 #launch template
 
-resource "aws_launch_template" "foo" {
+resource "aws_launch_template" "catalogue" {
   name     = "${var.project}-${var.environment}-catalogue"
-  image_id = aws_ami_from_instance.id
+  image_id = aws_ami_from_instance.catalogue.id
 
   # once autoscaling sees less traffic, it will terminate the instance
   instance_initiated_shutdown_behavior = "terminate"
@@ -123,7 +123,7 @@ resource "aws_autoscaling_group" "calalogue" {
   desired_capacity = 1
 
   launch_template {
-    id=aws_launch_template.catalogue.sg_id
+    id=aws_launch_template.catalogue.id
     version = "$latest"
   }
 
