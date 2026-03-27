@@ -3,7 +3,7 @@ resource "aws_lb" "backend-alb" {
   internal           = true
   load_balancer_type = "application"
   security_groups    = [local.backend-alb_sg_id]
-  subnets            = [local.private_subnet_ids]
+  subnets            = local.private_subnet_ids
 
  # keeping it as false, just to delete using terraform while practice
   enable_deletion_protection = false
@@ -39,8 +39,8 @@ resource "aws_route53_record" "www" {
   type    = "A"
 
   alias {
-    name                   = aws_elb.backend-albalb.dns_name
-    zone_id                = aws_elb.backend-alb.zone_id
+    name                   = aws_lb.backend-alb.dns_name
+    zone_id                = aws_lb.backend-alb.zone_id
     evaluate_target_health = true  
   }
 }
