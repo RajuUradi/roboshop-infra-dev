@@ -129,3 +129,39 @@ resource "aws_security_group_rule" "rabbitmq_payment"{
     security_group_id = data.aws_ssm_parameter.rabbitmq_sg_id.value
 
 }
+
+# backend-ALB
+
+# bastion----> backendalb
+#bastion ----> calalogue
+#backendalb---->catalogue
+
+resource "aws_security_group_rule" "backendalb_bastion"{
+    type ="ingress"
+    from_port=80
+    to_port=80
+    protocol = "tcp"
+    source_security_group_id=data.aws_ssm_parameter.bastion_sg_id.value
+    security_group_id=data.aws_ssm_parameter.backendalb_sg_id.value
+
+}
+
+resource "aws_security_group_rule" "catalogue_bastion"{
+    type ="ingress"
+    from_port=22
+    to_port=22
+    protocol = "tcp"
+    source_security_group_id=data.aws_ssm_parameter.bastion_sg_id.value
+    security_group_id=data.aws_ssm_parameter.catalogue_sg_id.value
+}
+
+resource "aws_security_group_rule" "catalogue_backendalb"{
+    type ="ingress"
+    from_port=8080
+    to_port=8080
+    protocol = "tcp"
+    source_security_group_id=data.aws_ssm_parameter.backendalb_sg_id.value
+    security_group_id=data.aws_ssm_parameter.catalogue_sg_id.value
+}
+
+

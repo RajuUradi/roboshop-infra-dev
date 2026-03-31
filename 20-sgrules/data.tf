@@ -39,6 +39,10 @@ data "aws_ssm_parameter" "rabbitmq_sg_id"{
     name="/${var.project}/${var.environment}/rabbitmq/sg_id"
 }
 
+data "aws_ssm_parameter" "backendalb_sg_id"{
+     name="/${var.project}/${var.environment}/backend-alb/sg_id"
+}
+
 data "http" "my_public_ip_v4" {
   url = "https://ipv4.icanhazip.com"
 }
